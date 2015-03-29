@@ -19,7 +19,14 @@ $(document).ready(function(){
 		'easingIn'			: 'easeOutBack',
 		'easingOut'			: 'easeInBack',
 		'hideOnContentClick': false,
-		'padding'			: 15
+		'padding'			: 15,
+		/*'afterClose':function() {
+			//window.location.reload();
+			parent.location.reload(true);
+		},*/
+		/*'onClosed': function() {   
+			parent.location.reload(true); 
+		}*/
 	});
 	
 	/* Listening for keyup events on fields of the "Add a note" form: */
@@ -39,6 +46,44 @@ $(document).ready(function(){
 	/* The submit button: */
 	$('#note-submit').live('click',function(e){
 		
+		if($('.pr-file').val().length>0) {
+			/*var data = new FormData();
+			jQuery.each(jQuery('.pr-file')[0].files, function(i, file) {
+				data.append('file-'+i, file);
+				alert(file);
+			});*/
+			var data = new FormData($('.note-form')[0]);
+//			var data = new FormData($('#note-form').get(0));
+//			alert(data);
+
+			jQuery.ajax({
+				async: true,
+				xhr : function() {
+					var XHR = $.ajaxSettings.xhr();
+					return XHR;
+				},
+				url:  "ajax/post_file.php",
+				type: "post",
+				data: data,
+				contentType: false,
+				processData: false,
+				async: false
+			}).done(function(text) {
+				alert(text);
+			});;
+
+/*			$.ajax({
+				url: "ajax/post_file.php",
+				type: "POST",
+				data: data,
+//				mimeType:"multipart/form-data",
+//				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+				processData: false,
+				contentType: false,
+				dataType: 'json'
+			});*/
+		}
+
 		if($('.pr-body').val().length<4)
 		{
 			alert("もっと長いコメントが欲しいです!")
@@ -52,13 +97,12 @@ $(document).ready(function(){
 		}
 		
 		$(this).replaceWith('<img src="img/ajax_load.gif" style="margin:30px auto;display:block" />');
-		
+
 		var data = {
 			'zindex'	: ++zIndex,
 			'body'		: $('.pr-body').val(),
 			'author'		: $('.pr-author').val(),
 			'color'		: $.trim($('#fancy_ajax .note').attr('class').replace('note','')),
-			'file'		: $('.pr-file').val()
 		};
 		
 		

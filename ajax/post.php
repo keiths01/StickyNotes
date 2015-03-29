@@ -13,9 +13,9 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 // Escaping the input data:
-$author = /*mysql_real_escape_string*/htmlspecialchars(strip_tags($_POST['author']));
-$body = /*mysql_real_escape_string*/htmlspecialchars(strip_tags($_POST['body']));
-$color = /*mysql_real_escape_string*/htmlspecialchars($_POST['color']);
+$author = htmlspecialchars(strip_tags($_POST['author']));
+$body = htmlspecialchars(strip_tags($_POST['body']));
+$color = htmlspecialchars($_POST['color']);
 $zindex = (int)$_POST['zindex'];
 
 try {
@@ -39,4 +39,5 @@ else*/ echo '0';
 } catch (PDOException $e) {
 	die($e->getMessage());
 }
+
 ?>
