@@ -1,0 +1,28 @@
+<h3 class="popupTitle">新しい付箋を作成します。</h3>
+
+<!-- The preview: -->
+<div id="previewNote" class="note yellow" style="left:0;top:65px;z-index:1">
+	<div class="body"></div>
+	<div class="author"></div>
+	<span class="data"></span>
+</div>
+
+<div id="noteData"> <!-- Holds the form -->
+<form action="" method="post" class="note-form">
+
+<label for="note-body">添付ふぁいる</label>
+<input type="file" accept="image/*" class="pr-file">
+
+<label for="note-name">名前</label>
+<input type="text" name="note-name" id="note-name" class="pr-author" value="" />
+
+<label>Color</label> <!-- Clicking one of the divs changes the color of the preview -->
+<div class="color yellow"></div>
+<div class="color blue"></div>
+<div class="color green"></div>
+
+<!-- The green submit button: -->
+<a id="note-submit" href="" class="green-button">追加！</a>
+
+</form>
+</div>
