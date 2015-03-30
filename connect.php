@@ -3,6 +3,9 @@
 $title = "連絡板";
 $comment = "遠慮なくペタペタ貼ってください♪";
 $comment2 = '<a href="stickynotes.sqlite">でーた</a>';
+$footer = 'View the <a href="http://tutorialzine.com/2010/01/sticky-notes-ajax-php-jquery/">original tutorial</a>, or download the <a href="demo.zip">source files</a>.';
+$mailto = "";
+$from = "";
 
 /* Database config */
 

@@ -6,10 +6,11 @@ $(document).ready(function(){
 	$('.note').each(function(){
 		/* Finding the biggest z-index value of the notes */
 		tmp = $(this).css('z-index');
-		if(tmp>zIndex) zIndex = tmp;
+		if (tmp>zIndex) zIndex = tmp;
 	})
 
 	/* A helper function for converting a set of elements to draggables: */
+//	$(".note").draggable();
 	make_draggable($('.note'));
 	
 	/* Configuring the fancybox plugin for the "Add a note" button: */
@@ -46,15 +47,15 @@ $(document).ready(function(){
 	/* The submit button: */
 	$('#note-submit').live('click',function(e){
 		
-		if($('.pr-file').val().length>0) {
-			/*var data = new FormData();
-			jQuery.each(jQuery('.pr-file')[0].files, function(i, file) {
-				data.append('file-'+i, file);
-				alert(file);
-			});*/
+		if ($('.pr-author').val().length<1) {
+			alert("お名前を教えてください!")
+			return false;
+		}
+		
+		if ($('.pr-file').val().length>1) {
+			$(this).replaceWith('<img src="img/ajax_load.gif" style="margin:30px auto;display:block" />');
+
 			var data = new FormData($('.note-form')[0]);
-//			var data = new FormData($('#note-form').get(0));
-//			alert(data);
 
 			jQuery.ajax({
 				async: true,
@@ -70,30 +71,13 @@ $(document).ready(function(){
 				async: false
 			}).done(function(text) {
 				alert(text);
-			});;
-
-/*			$.ajax({
-				url: "ajax/post_file.php",
-				type: "POST",
-				data: data,
-//				mimeType:"multipart/form-data",
-//				headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
-				processData: false,
-				contentType: false,
-				dataType: 'json'
-			});*/
-		}
-
-		if($('.pr-body').val().length<4)
-		{
-			alert("もっと長いコメントが欲しいです!")
-			return false;
-		}
-		
-		if($('.pr-author').val().length<1)
-		{
-			alert("お名前を教えてください!")
-			return false;
+				$('.pr-body').val($('.pr-file').val());
+			});
+		} else {
+			if ($('.pr-body').val().length<4) {
+				alert("もっと長いコメントが欲しいです!")
+				return false;
+			}
 		}
 		
 		$(this).replaceWith('<img src="img/ajax_load.gif" style="margin:30px auto;display:block" />');
@@ -118,7 +102,7 @@ $(document).ready(function(){
 				tmp.find('span.data').text(msg).end().css({'z-index':zIndex,top:0,left:0});
 				tmp.appendTo($('#main'));
 				
-				make_draggable(tmp)
+				make_draggable(tmp);
 			}
 			
 			$("#addButton").fancybox.close();
@@ -153,9 +137,12 @@ function make_draggable(elements)
 	});
 }
 
-function del_note(note_id)  
-{  
-	alert(note_id + "を削除します。");  
-	$.get("ajax/update_del.php?id=" + note_id);  
-	$("#note" + note_id).hide("slow");  
+function del_note(note_id)
+{
+	if (!confirm(note_id + 'を削除します。\nよろしいですか？')) {
+		return false;
+	}
+	//alert(note_id + "を削除します。");
+	$.get("ajax/update_del.php?id=" + note_id);
+	$("#note" + note_id).hide("slow");
 }
