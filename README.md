@@ -6,7 +6,7 @@ This is an AJAX-enabled Sticky Note management system. It will give visitors the
 
 ## Demo
 
-https://snotes.herokuapp.com/
+https://stinotes.herokuapp.com/
 
 ## Technologies
 
@@ -16,5 +16,5 @@ https://snotes.herokuapp.com/
 ## Install
 
 echo ".read table.sql" | sqlite3 stickynotes.sqlite
-#sqlite3 stickynotes.sqlite
+sqlite3 stickynotes.sqlite
 
