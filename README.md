@@ -15,6 +15,7 @@ https://stinotes.herokuapp.com/
 
 ## Install
 
+```
 echo ".read table.sql" | sqlite3 stickynotes.sqlite
-sqlite3 stickynotes.sqlite
-
+#sqlite3 stickynotes.sqlite
+```
