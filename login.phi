@@ -1,0 +1,23 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
+
+$auth = false;
+$auth_msg = "";
+if (isset($_SESSION["sPW"]) && $_SESSION["sPW"]===$password) {
+	$auth = true;
+}
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	if (isset($_POST["pass"]) && $_POST["pass"]===$password) {
+		// 一致した
+		//$_SESSION["sUSER"] = $_POST["user"];
+		$_SESSION["sPW"] = $_POST["pass"];
+		$auth = true;
+	} else {
+		// 不一致
+		@session_destroy();	//セッション破棄
+		$auth_msg = '<div align="center"><font color="pink">申し訳ありません。パスワードが間違っています。</font></div>'."\n";
+	}
+}
+?>

@@ -5,6 +5,11 @@ error_reporting(E_ALL^E_NOTICE);
 
 // Including the DB connection file:
 require 'connect.php';
+include("login.phi");
+if (!$auth) {
+	include("login.tpl.php");
+	exit;
+}
 
 // Removing notes that are older than an hour:
 $db->query("DELETE FROM notes WHERE id>3 AND dt<SUBTIME(NOW(),'0 1:0:0')");

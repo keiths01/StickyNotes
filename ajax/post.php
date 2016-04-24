@@ -19,9 +19,14 @@ $color = htmlspecialchars($_POST['color']);
 $zindex = (int)$_POST['zindex'];
 
 
-// メール送信  
-if (!empty($mailto)) {
-	$subject = "掲示板に書き込みがありました。";
+// メール送信
+require "../connect.php";
+if (isset($mailto)) {
+	mb_language("Japanese");
+	mb_internal_encoding("UTF-8");
+	mb_send_mail($mailto, $title, $msg, "From: ".$from);
+
+	/*$subject = "掲示板に書き込みがありました。";
 	$subject = mb_convert_encoding($subject, "UTF-8", "auto");
 	$result = mb_convert_encoding($body, "UTF-8", "auto");
 
@@ -30,12 +35,10 @@ if (!empty($mailto)) {
 		  . "Content-Type: text/plain; charset=ISO-2022-JP\r\n"
 		  . "Message-Id: <" . md5(uniqid(microtime())) . "@ドメイン>\r\n"
 		  . "From: ".$from."\r\n";
-	mb_send_mail($mailto, $subject, $result, mb_encode_mimeheader($header), "-f ".$from);
+	mb_send_mail($mailto, $subject, $result, mb_encode_mimeheader($header), "-f ".$from);*/
 }
 
 try {
-	require "../connect.php";
-
 	/* Inserting a new record in the notes DB: */
 	//$db->prepare($sql);
 	$db->query('INSERT INTO notes (text, name, color, xyz) VALUES ("'.$body.'","'.$author.'","'.$color.'","0x0x'.$zindex.'")');

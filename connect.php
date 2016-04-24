@@ -7,14 +7,15 @@ $footer = 'View the <a href="http://tutorialzine.com/2010/01/sticky-notes-ajax-p
 $mailto = "";
 $from = "";
 
-/* Database config */
+$password = "pass";
+$hint = "type 'pass'";
 
-$db_host		= '';
-$db_user		= '';
-$db_pass		= '';
+/* Database config */
+$db_host	= '';
+$db_user	= '';
+$db_pass	= '';
 $db_database	= 'stickynotes.sqlite';
 
 /* End config */
-
 $db = new PDO("sqlite:".$db_database) or die('Unable to establish a DB connection');
 ?>
