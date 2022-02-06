@@ -3,7 +3,7 @@
 --
 
 CREATE TABLE notes (
-  id integer primary key autoincrement,
+  id integer primary key auto_increment,
   text varchar(128) NOT NULL default '',
   name varchar(60) NOT NULL default '',
   color varchar(20) NOT NULL default 'yellow',
