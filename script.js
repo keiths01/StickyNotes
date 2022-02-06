@@ -21,13 +21,16 @@ $(document).ready(function(){
 		'easingOut'			: 'easeInBack',
 		'hideOnContentClick': false,
 		'padding'			: 15,
-		/*'afterClose':function() {
+		/*'afterClose':function() { // v2+
 			//window.location.reload();
 			parent.location.reload(true);
 		},*/
-		/*'onClosed': function() {   
+		/*'onClosed': function() {   // v1.3+
 			parent.location.reload(true); 
 		}*/
+		'callbackOnClose'	: function() {  // v1.26 
+			parent.location.reload(true); 
+		}
 	});
 	
 	/* Listening for keyup events on fields of the "Add a note" form: */
