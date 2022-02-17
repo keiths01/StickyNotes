@@ -87,8 +87,8 @@ $(document).ready(function(){
 
 		var data = {
 			'zindex'	: ++zIndex,
-			'body'		: $('.pr-body').val(),
-			'author'		: $('.pr-author').val(),
+			'body'		: $('.pr-body').val().replace('C:\\fakepath\\',''),
+			'author'	: $('.pr-author').val(),
 			'color'		: $.trim($('#fancy_ajax .note').attr('class').replace('note','')),
 		};
 		
