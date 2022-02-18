@@ -12,7 +12,7 @@ if (!$auth) {
 }
 
 // Removing notes that are older than an hour:
-$db->query("DELETE FROM notes WHERE id>3 AND dt<SUBTIME(NOW(),'0 1:0:0')");
+$db->query("UPDATE notes SET flag=0 WHERE id>1 AND dt<SUBTIME(NOW(),'0 1:0:0')");
 
 $sql = "SELECT * FROM notes WHERE flag=1 ORDER BY id DESC";
 
